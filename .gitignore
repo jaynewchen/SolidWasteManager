@@ -1,0 +1,33 @@
+# === Maven build output ===
+target/
+**/target/
+
+# === Node.js ===
+node_modules/
+swm-frontend/node_modules/
+
+# === Frontend build output ===
+swm-frontend/dist/
+dist/
+
+# === H2 database files ===
+*.mv.db
+*.trace.db
+
+# === Log files ===
+*.log
+
+# === IDE / OS files ===
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === Environment ===
+.env
+.env.local
+.env.*.local
