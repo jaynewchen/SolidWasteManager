@@ -10,6 +10,7 @@ const originalPush = router.push.bind(router)
 router.push = function push(location) {
   return originalPush(location).catch(err => {
     if (err.name === 'NavigationDuplicated') return err
+    if (err.message && /Redirected when going from/i.test(err.message)) return err
     throw err
   })
 }
@@ -33,8 +34,8 @@ router.beforeEach(async (to, from, next) => {
       return
     }
 
-    const hasRoles = store.getters.roles && store.getters.roles.length > 0
-    if (hasRoles) {
+    const hasUserInfo = store.state.user.userId != null
+    if (hasUserInfo) {
       next()
       return
     }

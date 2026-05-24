@@ -58,8 +58,8 @@ export default {
         if (!valid) return
         this.loading = true
         this.$store.dispatch('user/login', this.loginForm).then(() => {
-          const redirect = this.$route.query.redirect || '/'
-          this.$router.push(redirect)
+          const redirect = this.$route.query.redirect || '/dashboard'
+          this.$router.push(redirect).catch(() => {})
           this.loading = false
         }).catch(() => {
           this.loading = false
