@@ -15,6 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 
 @Aspect
@@ -28,36 +29,30 @@ public class OperationLogAspect {
 
     @Around("@annotation(opLog)")
     public Object around(ProceedingJoinPoint point, OperationLog opLog) throws Throwable {
-        long startTime = System.currentTimeMillis();
-
-        Object result;
-        try {
-            result = point.proceed();
-        } catch (Throwable e) {
-            throw e;
-        }
-
-        long costTime = System.currentTimeMillis() - startTime;
+        Object result = point.proceed();
 
         try {
             SwmOperationLog log = new SwmOperationLog();
             log.setModule(opLog.module());
             log.setOperation(opLog.operation());
             log.setLevel(opLog.level());
+            log.setDescription(buildDescription(opLog, result, point.getArgs()));
             log.setCreateTime(LocalDateTime.now());
-            log.setCostTime(costTime);
+            log.setCostTime(0L);
 
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            if (auth != null && auth.getPrincipal() instanceof Long) {
-                log.setUserId((Long) auth.getPrincipal());
-            }
-            if (auth != null && auth.getDetails() instanceof String) {
-                log.setUsername((String) auth.getDetails());
+            if (auth != null) {
+                if (auth.getPrincipal() instanceof Long) {
+                    log.setUserId((Long) auth.getPrincipal());
+                }
+                if (auth.getDetails() instanceof String) {
+                    log.setUsername((String) auth.getDetails());
+                }
             }
 
-            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            if (attributes != null) {
-                HttpServletRequest request = attributes.getRequest();
+            ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            if (attrs != null) {
+                HttpServletRequest request = attrs.getRequest();
                 log.setRequestMethod(request.getMethod());
                 log.setRequestUrl(request.getRequestURI());
                 log.setIpAddress(request.getRemoteAddr());
@@ -67,20 +62,73 @@ public class OperationLogAspect {
             if (args != null && args.length > 0) {
                 try {
                     String params = objectMapper.writeValueAsString(args);
-                    if (params != null && params.length() > 2000) {
+                    if (params.length() > 2000) {
                         params = params.substring(0, 2000);
                     }
                     log.setRequestParams(params);
-                } catch (Exception e) {
-                    log.setRequestParams("[serialization error]");
+                } catch (Exception ignored) {
                 }
             }
 
             operationLogService.save(log);
-        } catch (Exception e) {
-            // Logging should never break business logic
+        } catch (Exception ignored) {
         }
 
         return result;
+    }
+
+    private String buildDescription(OperationLog opLog, Object result, Object[] args) {
+        String operation = opLog.operation();
+
+        if (operation.contains("删除")) {
+            if (args != null && args.length > 0 && args[0] instanceof Number) {
+                return operation + " - ID: " + args[0];
+            }
+            return operation;
+        }
+
+        Object data = extractResultData(result);
+        if (data == null) {
+            return operation;
+        }
+
+        String username = getFieldValue(data, "username");
+        if (username != null) {
+            return operation + " - 用户: " + username;
+        }
+
+        String roleName = getFieldValue(data, "roleName");
+        if (roleName != null) {
+            return operation + " - 角色: " + roleName;
+        }
+
+        String batchNo = getFieldValue(data, "batchNo");
+        if (batchNo != null) {
+            return operation + " - 批次号: " + batchNo;
+        }
+
+        return operation;
+    }
+
+    private Object extractResultData(Object result) {
+        if (result == null) return null;
+        try {
+            Method getData = result.getClass().getMethod("getData");
+            return getData.invoke(result);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private String getFieldValue(Object obj, String fieldName) {
+        if (obj == null) return null;
+        try {
+            String getter = "get" + Character.toUpperCase(fieldName.charAt(0)) + fieldName.substring(1);
+            Method m = obj.getClass().getMethod(getter);
+            Object value = m.invoke(obj);
+            return value != null ? value.toString() : null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
