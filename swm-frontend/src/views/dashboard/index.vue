@@ -63,6 +63,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { getStats } from '@/api/dashboard'
 
 export default {
   name: 'Dashboard',
@@ -91,9 +92,9 @@ export default {
   },
   methods: {
     fetchStats() {
-      // Placeholder: fetch dashboard stats from backend
-      // In production, call an API endpoint to get real data
-      // For now, display with zeros
+      getStats().then(res => {
+        this.stats = res.data
+      }).catch(() => {})
     }
   }
 }
