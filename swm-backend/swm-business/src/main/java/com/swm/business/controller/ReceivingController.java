@@ -3,6 +3,7 @@ package com.swm.business.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.swm.business.service.ReceivingService;
 import com.swm.common.Result;
+import com.swm.common.annotation.OperationLog;
 import com.swm.common.dto.ReceivingDTO;
 import com.swm.common.dto.ReceivingQueryDTO;
 import com.swm.common.vo.ReceivingVO;
@@ -33,6 +34,7 @@ public class ReceivingController {
         return Result.ok(vo);
     }
 
+    @OperationLog(module = "收货管理", operation = "新增收货")
     @PostMapping
     @PreAuthorize("hasAuthority('receiving:add')")
     public Result<ReceivingVO> create(@RequestBody ReceivingDTO dto) {
@@ -41,6 +43,7 @@ public class ReceivingController {
         return Result.ok(vo);
     }
 
+    @OperationLog(module = "收货管理", operation = "编辑收货")
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('receiving:edit')")
     public Result<ReceivingVO> update(@PathVariable Long id, @RequestBody ReceivingDTO dto) {
@@ -48,6 +51,7 @@ public class ReceivingController {
         return Result.ok(vo);
     }
 
+    @OperationLog(module = "收货管理", operation = "删除收货", level = "IMPORTANT")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('receiving:delete')")
     public Result delete(@PathVariable Long id) {

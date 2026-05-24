@@ -3,6 +3,7 @@ package com.swm.business.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.swm.business.service.TestingService;
 import com.swm.common.Result;
+import com.swm.common.annotation.OperationLog;
 import com.swm.common.dto.TestingDTO;
 import com.swm.common.dto.TestingQueryDTO;
 import com.swm.common.vo.BatchOptionVO;
@@ -35,6 +36,7 @@ public class TestingController {
         return Result.ok(testingService.getById(id));
     }
 
+    @OperationLog(module = "检测管理", operation = "新增检测")
     @PostMapping
     @PreAuthorize("hasAuthority('testing:add')")
     public Result<TestingVO> create(@RequestBody TestingDTO dto) {
@@ -42,12 +44,14 @@ public class TestingController {
         return Result.ok(testingService.create(dto, userId));
     }
 
+    @OperationLog(module = "检测管理", operation = "编辑检测")
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('testing:edit')")
     public Result<TestingVO> update(@PathVariable Long id, @RequestBody TestingDTO dto) {
         return Result.ok(testingService.update(id, dto));
     }
 
+    @OperationLog(module = "检测管理", operation = "删除检测", level = "IMPORTANT")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('testing:delete')")
     public Result<Void> delete(@PathVariable Long id) {
@@ -55,6 +59,7 @@ public class TestingController {
         return Result.ok();
     }
 
+    @OperationLog(module = "检测管理", operation = "审核检测")
     @PutMapping("/{id}/review")
     @PreAuthorize("hasAuthority('testing:edit')")
     public Result<TestingVO> review(@PathVariable Long id, @RequestBody Map<String, Object> body) {

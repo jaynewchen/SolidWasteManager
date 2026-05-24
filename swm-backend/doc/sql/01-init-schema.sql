@@ -330,14 +330,26 @@ CREATE TABLE swm_operation_log (
     username VARCHAR(50) DEFAULT NULL COMMENT '操作人用户名',
     module VARCHAR(50) DEFAULT NULL COMMENT '操作模块',
     operation VARCHAR(50) DEFAULT NULL COMMENT '操作类型',
-    method VARCHAR(200) DEFAULT NULL COMMENT '请求方法',
-    params TEXT DEFAULT NULL COMMENT '请求参数',
-    ip VARCHAR(50) DEFAULT NULL COMMENT 'IP地址',
-    status TINYINT DEFAULT 1 COMMENT '状态: 1=成功, 0=失败',
-    error_msg VARCHAR(500) DEFAULT NULL COMMENT '错误信息',
-    execution_time BIGINT DEFAULT NULL COMMENT '执行时间(ms)',
+    description VARCHAR(500) DEFAULT NULL COMMENT '操作描述',
+    level VARCHAR(20) DEFAULT 'NORMAL' COMMENT '日志级别: IMPORTANT=重要, NORMAL=一般',
+    request_method VARCHAR(10) DEFAULT NULL COMMENT '请求方法',
+    request_url VARCHAR(255) DEFAULT NULL COMMENT '请求URL',
+    request_params VARCHAR(2000) DEFAULT NULL COMMENT '请求参数',
+    ip_address VARCHAR(50) DEFAULT NULL COMMENT 'IP地址',
+    cost_time BIGINT DEFAULT NULL COMMENT '执行耗时(ms)',
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     INDEX idx_user_id (user_id),
     INDEX idx_module (module),
     INDEX idx_create_time (create_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='操作日志表';
+
+-- 系统配置表
+DROP TABLE IF EXISTS sys_config;
+CREATE TABLE sys_config (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    config_key VARCHAR(100) NOT NULL COMMENT '配置键',
+    config_value VARCHAR(500) DEFAULT NULL COMMENT '配置值',
+    description VARCHAR(200) DEFAULT NULL COMMENT '配置描述',
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    UNIQUE KEY uk_config_key (config_key)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统配置表';

@@ -2,6 +2,7 @@ package com.swm.system.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.swm.common.Result;
+import com.swm.common.annotation.OperationLog;
 import com.swm.common.dto.RoleDTO;
 import com.swm.common.dto.RoleQueryDTO;
 import com.swm.common.entity.SysMenu;
@@ -39,18 +40,21 @@ public class RoleController {
         return Result.ok(roleService.getById(id));
     }
 
+    @OperationLog(module = "角色管理", operation = "新增角色", level = "IMPORTANT")
     @PostMapping
     @PreAuthorize("hasAuthority('system:role:add')")
     public Result<RoleVO> create(@RequestBody RoleDTO dto) {
         return Result.ok(roleService.create(dto));
     }
 
+    @OperationLog(module = "角色管理", operation = "编辑角色", level = "IMPORTANT")
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('system:role:edit')")
     public Result<RoleVO> update(@PathVariable Long id, @RequestBody RoleDTO dto) {
         return Result.ok(roleService.update(id, dto));
     }
 
+    @OperationLog(module = "角色管理", operation = "删除角色", level = "IMPORTANT")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('system:role:delete')")
     public Result<Void> delete(@PathVariable Long id) {

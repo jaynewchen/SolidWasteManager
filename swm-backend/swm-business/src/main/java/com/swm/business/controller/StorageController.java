@@ -3,6 +3,7 @@ package com.swm.business.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.swm.business.service.StorageService;
 import com.swm.common.Result;
+import com.swm.common.annotation.OperationLog;
 import com.swm.common.dto.StorageDTO;
 import com.swm.common.dto.StorageQueryDTO;
 import com.swm.common.vo.*;
@@ -33,6 +34,7 @@ public class StorageController {
         return Result.ok(storageService.getById(id));
     }
 
+    @OperationLog(module = "入库管理", operation = "新增入库")
     @PostMapping
     @PreAuthorize("hasAuthority('storage:add')")
     public Result<StorageVO> create(@RequestBody StorageDTO dto) {
@@ -40,12 +42,14 @@ public class StorageController {
         return Result.ok(storageService.create(dto, userId));
     }
 
+    @OperationLog(module = "入库管理", operation = "编辑入库")
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('storage:edit')")
     public Result<StorageVO> update(@PathVariable Long id, @RequestBody StorageDTO dto) {
         return Result.ok(storageService.update(id, dto));
     }
 
+    @OperationLog(module = "入库管理", operation = "删除入库", level = "IMPORTANT")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('storage:delete')")
     public Result<Void> delete(@PathVariable Long id) {

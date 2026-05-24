@@ -191,3 +191,8 @@ INSERT INTO swm_waste_category (id, category_code, category_name, status) VALUES
 INSERT INTO swm_treatment_process (id, process_code, process_name, status) VALUES
 (1, 'P001', '高温焚烧', 1),
 (2, 'P002', '物理化学处理', 1);
+
+-- 系统配置
+INSERT INTO sys_config (config_key, config_value, description) VALUES
+('LOG_RETENTION_LIMIT', '5000', '操作日志保留上限条数')
+ON DUPLICATE KEY UPDATE config_value = VALUES(config_value);

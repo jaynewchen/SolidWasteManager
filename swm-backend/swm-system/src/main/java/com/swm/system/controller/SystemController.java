@@ -3,6 +3,7 @@ package com.swm.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.swm.common.Result;
+import com.swm.common.annotation.OperationLog;
 import com.swm.common.entity.SysRole;
 import com.swm.common.entity.SysUser;
 import com.swm.common.entity.SysUserRole;
@@ -60,6 +61,7 @@ public class SystemController {
         return Result.ok(p);
     }
 
+    @OperationLog(module = "用户管理", operation = "新增用户", level = "IMPORTANT")
     @PostMapping("/users")
     @PreAuthorize("hasRole('ADMIN')")
     public Result<SysUser> createUser(@RequestBody SysUser user) {
@@ -75,6 +77,7 @@ public class SystemController {
         return Result.ok(user);
     }
 
+    @OperationLog(module = "用户管理", operation = "编辑用户", level = "IMPORTANT")
     @PutMapping("/users/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result<SysUser> updateUser(@PathVariable Long id, @RequestBody SysUser user) {
@@ -95,6 +98,7 @@ public class SystemController {
         return Result.ok(user);
     }
 
+    @OperationLog(module = "用户管理", operation = "删除用户", level = "IMPORTANT")
     @DeleteMapping("/users/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result deleteUser(@PathVariable Long id) {

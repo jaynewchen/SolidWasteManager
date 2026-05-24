@@ -3,6 +3,7 @@ package com.swm.business.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.swm.business.service.TransferService;
 import com.swm.common.Result;
+import com.swm.common.annotation.OperationLog;
 import com.swm.common.dto.TransferDTO;
 import com.swm.common.dto.TransferQueryDTO;
 import com.swm.common.vo.BatchOptionVO;
@@ -35,6 +36,7 @@ public class TransferController {
         return Result.ok(transferService.getById(id));
     }
 
+    @OperationLog(module = "转运管理", operation = "新增转运")
     @PostMapping
     @PreAuthorize("hasAuthority('transfer:add')")
     public Result<TransferVO> create(@RequestBody TransferDTO dto) {
@@ -42,12 +44,14 @@ public class TransferController {
         return Result.ok(transferService.create(dto, userId));
     }
 
+    @OperationLog(module = "转运管理", operation = "编辑转运")
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('transfer:edit')")
     public Result<TransferVO> update(@PathVariable Long id, @RequestBody TransferDTO dto) {
         return Result.ok(transferService.update(id, dto));
     }
 
+    @OperationLog(module = "转运管理", operation = "删除转运", level = "IMPORTANT")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('transfer:delete')")
     public Result<Void> delete(@PathVariable Long id) {

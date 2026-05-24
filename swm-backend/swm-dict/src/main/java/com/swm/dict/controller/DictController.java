@@ -3,6 +3,7 @@ package com.swm.dict.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.swm.common.Result;
+import com.swm.common.annotation.OperationLog;
 import com.swm.common.entity.*;
 import com.swm.dict.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,7 @@ public class DictController {
         return Result.ok(p);
     }
 
+    @OperationLog(module = "数据字典", operation = "新增产废单位")
     @PostMapping("/producers")
     @PreAuthorize("hasRole('ADMIN')")
     public Result createProducer(@RequestBody SwmWasteProducer producer) {
@@ -92,6 +94,7 @@ public class DictController {
         return Result.ok(producer);
     }
 
+    @OperationLog(module = "数据字典", operation = "编辑产废单位")
     @PutMapping("/producers/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result updateProducer(@PathVariable Long id, @RequestBody SwmWasteProducer producer) {
@@ -100,6 +103,7 @@ public class DictController {
         return Result.ok(producer);
     }
 
+    @OperationLog(module = "数据字典", operation = "删除产废单位", level = "IMPORTANT")
     @DeleteMapping("/producers/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result deleteProducer(@PathVariable Long id) {
@@ -118,6 +122,7 @@ public class DictController {
         return Result.ok(p);
     }
 
+    @OperationLog(module = "数据字典", operation = "新增车间")
     @PostMapping("/workshops")
     @PreAuthorize("hasRole('ADMIN')")
     public Result createWorkshop(@RequestBody SwmWorkshop workshop) {
@@ -125,6 +130,7 @@ public class DictController {
         return Result.ok(workshop);
     }
 
+    @OperationLog(module = "数据字典", operation = "编辑车间")
     @PutMapping("/workshops/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result updateWorkshop(@PathVariable Long id, @RequestBody SwmWorkshop workshop) {
@@ -133,6 +139,7 @@ public class DictController {
         return Result.ok(workshop);
     }
 
+    @OperationLog(module = "数据字典", operation = "删除车间", level = "IMPORTANT")
     @DeleteMapping("/workshops/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result deleteWorkshop(@PathVariable Long id) {
@@ -151,6 +158,7 @@ public class DictController {
         return Result.ok(p);
     }
 
+    @OperationLog(module = "数据字典", operation = "新增矿山来源")
     @PostMapping("/mines")
     @PreAuthorize("hasRole('ADMIN')")
     public Result createMine(@RequestBody SwmMineSource mine) {
@@ -158,6 +166,7 @@ public class DictController {
         return Result.ok(mine);
     }
 
+    @OperationLog(module = "数据字典", operation = "编辑矿山来源")
     @PutMapping("/mines/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result updateMine(@PathVariable Long id, @RequestBody SwmMineSource mine) {
@@ -166,6 +175,7 @@ public class DictController {
         return Result.ok(mine);
     }
 
+    @OperationLog(module = "数据字典", operation = "删除矿山来源", level = "IMPORTANT")
     @DeleteMapping("/mines/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result deleteMine(@PathVariable Long id) {
@@ -184,6 +194,7 @@ public class DictController {
         return Result.ok(p);
     }
 
+    @OperationLog(module = "数据字典", operation = "新增废物类别")
     @PostMapping("/categories")
     @PreAuthorize("hasRole('ADMIN')")
     public Result createCategory(@RequestBody SwmWasteCategory category) {
@@ -191,6 +202,7 @@ public class DictController {
         return Result.ok(category);
     }
 
+    @OperationLog(module = "数据字典", operation = "编辑废物类别")
     @PutMapping("/categories/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result updateCategory(@PathVariable Long id, @RequestBody SwmWasteCategory category) {
@@ -199,6 +211,7 @@ public class DictController {
         return Result.ok(category);
     }
 
+    @OperationLog(module = "数据字典", operation = "删除废物类别", level = "IMPORTANT")
     @DeleteMapping("/categories/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result deleteCategory(@PathVariable Long id) {
@@ -217,6 +230,7 @@ public class DictController {
         return Result.ok(p);
     }
 
+    @OperationLog(module = "数据字典", operation = "新增处置工艺")
     @PostMapping("/processes")
     @PreAuthorize("hasRole('ADMIN')")
     public Result createProcess(@RequestBody SwmTreatmentProcess process) {
@@ -224,6 +238,7 @@ public class DictController {
         return Result.ok(process);
     }
 
+    @OperationLog(module = "数据字典", operation = "编辑处置工艺")
     @PutMapping("/processes/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result updateProcess(@PathVariable Long id, @RequestBody SwmTreatmentProcess process) {
@@ -232,6 +247,7 @@ public class DictController {
         return Result.ok(process);
     }
 
+    @OperationLog(module = "数据字典", operation = "删除处置工艺", level = "IMPORTANT")
     @DeleteMapping("/processes/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Result deleteProcess(@PathVariable Long id) {

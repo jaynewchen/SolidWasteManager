@@ -311,10 +311,21 @@ CREATE TABLE IF NOT EXISTS swm_operation_log (
     module VARCHAR(50) DEFAULT NULL,
     operation VARCHAR(50) DEFAULT NULL,
     description VARCHAR(500) DEFAULT NULL,
+    level VARCHAR(20) DEFAULT 'NORMAL',
     request_method VARCHAR(10) DEFAULT NULL,
     request_url VARCHAR(255) DEFAULT NULL,
     request_params VARCHAR(2000) DEFAULT NULL,
     ip_address VARCHAR(50) DEFAULT NULL,
     cost_time BIGINT DEFAULT NULL,
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE swm_operation_log ADD COLUMN IF NOT EXISTS level VARCHAR(20) DEFAULT 'NORMAL';
+
+CREATE TABLE IF NOT EXISTS sys_config (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    config_key VARCHAR(100) NOT NULL,
+    config_value VARCHAR(500) DEFAULT NULL,
+    description VARCHAR(200) DEFAULT NULL,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_config_key (config_key)
 );
