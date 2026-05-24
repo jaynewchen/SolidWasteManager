@@ -110,7 +110,7 @@
         <el-form-item label="角色">
           <el-checkbox-group v-model="formData.roleIds">
             <el-checkbox v-for="role in roleList" :key="role.id" :label="role.id">
-              {{ role.name }}
+              {{ role.roleName }}
             </el-checkbox>
           </el-checkbox-group>
         </el-form-item>

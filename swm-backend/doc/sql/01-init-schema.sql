@@ -3,8 +3,8 @@
 -- 固废管理系统 - 数据库初始化脚本
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS swm_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE swm_db;
+CREATE DATABASE IF NOT EXISTS swm DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE swm;
 
 -- ==================== System Tables ====================
 

@@ -3,9 +3,7 @@ package com.swm.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.swm.common.Result;
-import com.swm.common.entity.SysRole;
 import com.swm.common.entity.SysUser;
-import com.swm.system.mapper.SysRoleMapper;
 import com.swm.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,17 +11,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/system")
 public class SystemController {
 
     @Autowired
     private SysUserMapper sysUserMapper;
-
-    @Autowired
-    private SysRoleMapper sysRoleMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -75,12 +68,5 @@ public class SystemController {
     public Result deleteUser(@PathVariable Long id) {
         sysUserMapper.deleteById(id);
         return Result.ok();
-    }
-
-    @GetMapping("/roles")
-    @PreAuthorize("hasRole('ADMIN')")
-    public Result<List<SysRole>> listRoles() {
-        List<SysRole> roles = sysRoleMapper.selectList(null);
-        return Result.ok(roles);
     }
 }
