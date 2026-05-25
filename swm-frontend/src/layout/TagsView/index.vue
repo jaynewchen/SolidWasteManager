@@ -81,50 +81,58 @@ export default {
 
 <style scoped>
 .tags-view {
-  height: 34px;
-  background: #f0f2f5;
-  border-bottom: 1px solid #d8dce5;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+  height: 36px;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  box-shadow: 0 1px 2px rgba(79,70,229,0.04);
 }
 .tags-view-wrapper {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 10px;
+  padding: 0 12px;
   overflow-x: auto;
 }
 .tags-view-item {
   display: inline-flex;
   align-items: center;
-  height: 26px;
-  line-height: 26px;
-  padding: 0 8px;
-  margin: 0 2px;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 10px;
+  margin: 0 3px;
   font-size: 12px;
-  color: #495060;
-  background: #fff;
-  border: 1px solid #d8dce5;
-  border-radius: 2px;
+  font-weight: 500;
+  color: #64748B;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
   text-decoration: none;
   white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.tags-view-item:hover {
+  color: #4F46E5;
+  border-color: rgba(79,70,229,0.3);
 }
 .tags-view-item.active {
-  color: #fff;
-  background: #409EFF;
-  border-color: #409EFF;
+  color: #4F46E5;
+  background: rgba(79,70,229,0.06);
+  border-color: rgba(79,70,229,0.2);
 }
 .tags-view-item-close {
   margin-left: 4px;
-  font-size: 12px;
+  font-size: 10px;
   cursor: pointer;
   border-radius: 50%;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.15s;
 }
 .tags-view-item-close:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(79,70,229,0.1);
+  color: #4F46E5;
 }
 </style>

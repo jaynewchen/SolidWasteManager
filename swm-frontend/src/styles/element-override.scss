@@ -1,0 +1,398 @@
+// ============================================================
+// Element UI Component Overrides — Corporate Trust Style
+// ============================================================
+@import './variables.scss';
+
+// --- Buttons ---
+.el-button {
+  border-radius: $radius-md;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: $transition-base;
+}
+
+.el-button--primary {
+  background: $gradient-primary;
+  border-color: transparent;
+  box-shadow: $shadow-btn;
+
+  &:hover, &:focus {
+    background: linear-gradient(135deg, $color-primary-hv 0%, darken($color-secondary, 5%) 100%);
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px 0 rgba(79,70,229,0.35);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.el-button--default {
+  border-color: $color-border;
+  color: $color-text;
+
+  &:hover {
+    background: lighten($color-bg, 2%);
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+}
+
+.el-button--success {
+  background: $color-success;
+  border-color: $color-success;
+}
+
+.el-button--warning {
+  background: $color-warning;
+  border-color: $color-warning;
+}
+
+.el-button--danger {
+  background: $color-danger;
+  border-color: $color-danger;
+}
+
+.el-button--small { border-radius: $radius-sm; }
+.el-button--mini  { border-radius: $radius-sm; }
+
+// --- Inputs ---
+.el-input__inner {
+  border-radius: $radius-md;
+  border-color: $color-border;
+  transition: $transition-base;
+
+  &:focus {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 2px rgba(79,70,229,0.15);
+  }
+}
+
+.el-input.is-active .el-input__inner,
+.el-input__inner:focus {
+  border-color: $color-primary;
+}
+
+.el-input--small .el-input__inner {
+  border-radius: $radius-sm;
+}
+
+.el-textarea__inner {
+  border-radius: $radius-md;
+  border-color: $color-border;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+// --- Select ---
+.el-select .el-input.is-focus .el-input__inner {
+  border-color: $color-primary;
+}
+
+// --- Cards ---
+.el-card {
+  border-radius: $radius-lg;
+  border: 1px solid $color-border-lt;
+  box-shadow: $shadow-card;
+  transition: $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-hover;
+    transform: translateY(-2px);
+  }
+}
+
+.el-card__header {
+  border-bottom: 1px solid $color-border-lt;
+  padding: $spacing-md 20px;
+  font-weight: 600;
+  color: $color-text;
+}
+
+.el-card__body {
+  padding: 20px;
+}
+
+// --- Tables ---
+.el-table {
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background: $color-surface;
+
+  th.el-table__cell {
+    background: #F8FAFC;
+    color: $color-text-muted;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid $color-border;
+  }
+
+  .el-table__row {
+    transition: $transition-fast;
+
+    &:hover > td.el-table__cell {
+      background: rgba(79,70,229,0.03);
+    }
+  }
+
+  td.el-table__cell {
+    border-bottom: 1px solid $color-border-lt;
+    color: $color-text;
+  }
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+  background: #FAFBFC;
+}
+
+// --- Pagination ---
+.el-pagination {
+  .el-pager li {
+    border-radius: $radius-sm;
+    font-weight: 500;
+
+    &.active {
+      background: $color-primary;
+      color: #fff;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  .btn-prev, .btn-next {
+    border-radius: $radius-sm;
+  }
+}
+
+// --- Dialog ---
+.el-dialog {
+  border-radius: $radius-xl;
+  box-shadow: $shadow-hover;
+
+  .el-dialog__header {
+    padding: 20px 24px 0;
+    border-bottom: none;
+  }
+
+  .el-dialog__title {
+    font-weight: 700;
+    color: $color-text;
+  }
+
+  .el-dialog__body {
+    padding: 20px 24px;
+  }
+
+  .el-dialog__footer {
+    padding: 0 24px 20px;
+  }
+}
+
+// --- Menu (Dropdown) ---
+.el-dropdown-menu {
+  border-radius: $radius-md;
+  box-shadow: $shadow-hover;
+  border: 1px solid $color-border-lt;
+  padding: 4px;
+
+  .el-dropdown-menu__item {
+    border-radius: $radius-sm;
+    transition: $transition-fast;
+
+    &:hover {
+      background: rgba(79,70,229,0.06);
+      color: $color-primary;
+    }
+  }
+}
+
+// --- Tabs ---
+.el-tabs__item {
+  font-weight: 500;
+  transition: $transition-fast;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &.is-active {
+    color: $color-primary;
+    font-weight: 600;
+  }
+}
+
+.el-tabs__active-bar {
+  background-color: $color-primary;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+}
+
+.el-tabs__nav-wrap::after {
+  background-color: $color-border-lt;
+  height: 1px;
+}
+
+// --- Tags ---
+.el-tag {
+  border-radius: $radius-full;
+  font-weight: 500;
+  border: none;
+}
+
+.el-tag--primary {
+  background: rgba(79,70,229,0.1);
+  color: $color-primary;
+}
+
+.el-tag--success {
+  background: rgba(16,185,129,0.1);
+  color: darken($color-success, 8%);
+}
+
+.el-tag--warning {
+  background: rgba(245,158,11,0.1);
+  color: darken($color-warning, 8%);
+}
+
+.el-tag--danger {
+  background: rgba(239,68,68,0.1);
+  color: darken($color-danger, 5%);
+}
+
+.el-tag--info {
+  background: rgba(100,116,139,0.1);
+  color: $color-text-muted;
+}
+
+// --- Badge ---
+.el-badge__content {
+  border: none;
+  font-weight: 600;
+}
+
+// --- Switch ---
+.el-switch.is-checked .el-switch__core {
+  background-color: $color-primary;
+  border-color: $color-primary;
+}
+
+// --- Checkbox ---
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: $color-primary;
+  border-color: $color-primary;
+}
+
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: $color-primary;
+}
+
+// --- Radio ---
+.el-radio__input.is-checked .el-radio__inner {
+  background-color: $color-primary;
+  border-color: $color-primary;
+}
+
+.el-radio__input.is-checked + .el-radio__label {
+  color: $color-primary;
+}
+
+// --- Date Picker ---
+.el-date-table td.today span {
+  color: $color-primary;
+}
+
+.el-date-table td.current:not(.disabled) span {
+  background-color: $color-primary;
+}
+
+.el-date-table td.available:hover {
+  color: $color-primary;
+}
+
+// --- Form ---
+.el-form-item__label {
+  font-weight: 600;
+  color: $color-text;
+}
+
+// --- Loading / Message Box ---
+.el-message-box {
+  border-radius: $radius-xl;
+  box-shadow: $shadow-hover;
+}
+
+.el-message {
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+}
+
+// --- Tooltip ---
+.el-tooltip__popper {
+  border-radius: $radius-sm;
+}
+
+// --- Breadcrumb ---
+.el-breadcrumb__inner {
+  font-weight: 500;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.el-breadcrumb__item:last-child .el-breadcrumb__inner {
+  color: $color-text-muted;
+}
+
+// --- Scrollbar ---
+.el-scrollbar__thumb {
+  background: rgba(79,70,229,0.2);
+
+  &:hover {
+    background: rgba(79,70,229,0.35);
+  }
+}
+
+// --- Steps ---
+.el-step__head.is-finish .el-step__icon {
+  background: $color-primary;
+  border-color: $color-primary;
+}
+
+.el-step__title.is-finish {
+  color: $color-primary;
+}
+
+// --- Progress ---
+.el-progress-bar__inner {
+  background: $gradient-primary;
+  border-radius: $radius-full;
+}
+
+// --- Divider ---
+.el-divider__text {
+  color: $color-text-muted;
+  font-weight: 500;
+}
+
+// --- Popover ---
+.el-popover {
+  border-radius: $radius-md;
+  box-shadow: $shadow-hover;
+}
+
+// --- Input Number ---
+.el-input-number__decrease,
+.el-input-number__increase {
+  &:hover {
+    color: $color-primary;
+  }
+}

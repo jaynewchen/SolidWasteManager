@@ -2,6 +2,7 @@
   <div class="login-container">
     <div class="login-card">
       <h2 class="title">固废管理系统</h2>
+      <p class="subtitle">Solid Waste Management System</p>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
         <el-form-item prop="username">
           <el-input
@@ -76,19 +77,54 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  position: relative;
+  overflow: hidden;
+}
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -15%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+}
+.login-container::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
 }
 .login-card {
-  width: 420px;
-  padding: 40px;
+  position: relative;
+  z-index: 1;
+  width: 424px;
+  padding: 48px 44px;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
 }
 .title {
   text-align: center;
-  font-size: 24px;
-  color: #303133;
-  margin-bottom: 30px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #94A3B8;
+  margin-bottom: 36px;
+  font-weight: 500;
 }
 </style>

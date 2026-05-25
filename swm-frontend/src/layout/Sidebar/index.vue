@@ -9,9 +9,9 @@
       :collapse="isCollapse"
       :collapse-transition="false"
       :unique-opened="true"
-      background-color="#304156"
-      text-color="#bfcbd9"
-      active-text-color="#409EFF"
+      background-color="transparent"
+      text-color="#A5B4FC"
+      active-text-color="#E0E7FF"
       mode="vertical"
       router
     >
@@ -71,27 +71,38 @@ export default {
 
 <style scoped>
 .sidebar-container {
-  transition: width 0.3s;
+  transition: width 0.3s ease-out;
   overflow: hidden;
 }
 .sidebar-logo {
-  height: 50px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #002140;
+  background: rgba(0,0,0,0.15);
   color: #fff;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .logo-text {
   padding: 0 10px;
+  background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .logo-text-mini {
   font-size: 14px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .el-menu {
   border-right: none;

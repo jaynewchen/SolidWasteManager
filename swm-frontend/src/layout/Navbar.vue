@@ -80,7 +80,7 @@ export default {
 
 <style scoped>
 .navbar {
-  height: 50px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -93,28 +93,37 @@ export default {
   font-size: 20px;
   cursor: pointer;
   margin-right: 16px;
-  color: #666;
+  color: #64748B;
+  transition: color 0.2s;
+  padding: 4px;
+  border-radius: 6px;
 }
 .navbar-hamburger:hover {
-  color: #409EFF;
+  color: #4F46E5;
+  background: rgba(79,70,229,0.06);
 }
 .navbar-breadcrumb {
-  line-height: 50px;
+  line-height: 52px;
 }
 .navbar-right {
   display: flex;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 4px;
 }
 .navbar-user {
   cursor: pointer;
-  color: #666;
+  color: #475569;
   font-size: 14px;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
 }
 .navbar-user:hover {
-  color: #409EFF;
+  color: #4F46E5;
+  background: rgba(79,70,229,0.05);
 }
 </style>
